@@ -18,7 +18,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         <PersonalHeader
           data={data.personalInfo}
           layout="stacked"
-          className="[&_h1]:text-white [&_span]:text-slate-300 [&_a]:text-blue-300"
+          className="[&_h1]:text-white [&_span]:text-slate-300 [&_a]:text-emerald-300"
         />
         <SkillsGrid
           items={data.skills}

@@ -1,4 +1,4 @@
-type BadgeVariant = "default" | "blue" | "green";
+type BadgeVariant = "default" | "emerald" | "green";
 
 interface BadgeProps {
   children: React.ReactNode;
@@ -6,9 +6,9 @@ interface BadgeProps {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  default: "bg-gray-100 text-gray-700",
-  blue: "bg-blue-100 text-blue-700",
-  green: "bg-green-100 text-green-700",
+  default: "bg-slate-100 text-slate-600",
+  emerald: "bg-emerald-50 text-emerald-700",
+  green: "bg-green-50 text-green-700",
 };
 
 export function Badge({ children, variant = "default" }: BadgeProps) {

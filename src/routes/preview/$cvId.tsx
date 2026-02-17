@@ -18,8 +18,8 @@ function PreviewPage() {
   if (!cv) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
-        <p className="text-gray-600">CV not found</p>
-        <Link to="/" className="text-blue-600 hover:underline">
+        <p className="text-slate-500">CV not found</p>
+        <Link to="/" className="text-emerald-600 hover:underline">
           Back to Dashboard
         </Link>
       </div>
@@ -28,18 +28,18 @@ function PreviewPage() {
 
   return (
     <div className="flex flex-1 flex-col">
-      <div className="flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 print:hidden">
+      <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 print:hidden">
         <div className="flex items-center gap-4">
-          <Link to="/editor/$cvId" params={{ cvId: cv.id }} className="text-sm text-gray-600 hover:text-gray-900">
+          <Link to="/editor/$cvId" params={{ cvId: cv.id }} className="text-sm text-slate-500 hover:text-slate-800 transition-colors">
             &larr; Back to Editor
           </Link>
-          <h1 className="text-lg font-semibold text-gray-900">{cv.name}</h1>
+          <h1 className="text-lg font-semibold text-slate-800">{cv.name}</h1>
         </div>
         <Button onClick={handlePrint}>
           Export PDF
         </Button>
       </div>
-      <div className="flex-1 overflow-auto bg-gray-100 p-4 md:p-8">
+      <div className="flex-1 overflow-auto bg-slate-100 p-4 md:p-8">
         <CvDocument ref={printRef} data={cv} />
       </div>
     </div>

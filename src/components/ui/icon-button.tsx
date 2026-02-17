@@ -9,7 +9,7 @@ export function IconButton({ icon, label, className = "", ...props }: IconButton
   return (
     <button
       aria-label={label}
-      className={`inline-flex items-center justify-center rounded-lg p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
+      className={`inline-flex items-center justify-center rounded-lg p-2 text-slate-400 transition-all duration-200 hover:bg-slate-100 hover:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 ${className}`}
       {...props}
     >
       {icon}

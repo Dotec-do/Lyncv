@@ -48,8 +48,8 @@ function EditorPage() {
   if (!cv) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
-        <p className="text-gray-600">CV not found</p>
-        <Link to="/" className="text-blue-600 hover:underline">
+        <p className="text-slate-500">CV not found</p>
+        <Link to="/" className="text-emerald-600 hover:underline">
           Back to Dashboard
         </Link>
       </div>
@@ -95,7 +95,7 @@ function EditorPage() {
         <Link
           to="/preview/$cvId"
           params={{ cvId: cv.id }}
-          className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+          className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 transition-all duration-200 shadow-sm hover:shadow-md"
         >
           Full Preview & Export
         </Link>

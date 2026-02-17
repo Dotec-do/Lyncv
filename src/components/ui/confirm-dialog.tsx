@@ -31,7 +31,7 @@ export function ConfirmDialog({
     <dialog
       ref={dialogRef}
       onClose={onCancel}
-      className="rounded-xl border-none bg-white p-6 shadow-xl backdrop:bg-black/50 max-w-sm w-full"
+      className="rounded-2xl border-none bg-white p-6 shadow-2xl backdrop:bg-black/40 backdrop:backdrop-blur-sm max-w-sm w-full"
     >
       <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
       <p className="mt-2 text-sm text-gray-600">{message}</p>

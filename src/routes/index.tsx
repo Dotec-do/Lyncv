@@ -35,8 +35,8 @@ function HomePage() {
     <PageShell>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Your CVs</h1>
-          <p className="mt-1 text-gray-600">Create and manage your resumes</p>
+          <h1 className="text-3xl font-bold text-slate-900">Your CVs</h1>
+          <p className="mt-1 text-slate-500">Create and manage your resumes</p>
         </div>
         <Button onClick={() => setShowCreate(true)}>
           + New CV
@@ -44,12 +44,12 @@ function HomePage() {
       </div>
 
       {cvList.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 py-16">
-          <svg className="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 py-20 bg-white">
+          <svg className="h-14 w-14 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
-          <h3 className="mt-4 text-lg font-medium text-gray-900">No CVs yet</h3>
-          <p className="mt-1 text-sm text-gray-500">Get started by creating your first CV</p>
+          <h3 className="mt-4 text-lg font-medium text-slate-800">No CVs yet</h3>
+          <p className="mt-1 text-sm text-slate-400">Get started by creating your first CV</p>
           <Button className="mt-4" onClick={() => setShowCreate(true)}>
             Create your first CV
           </Button>

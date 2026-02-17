@@ -24,7 +24,7 @@ export function PersonalHeader({ data, layout = "inline", className = "" }: Pers
           <span key={i}>{item}</span>
         ))}
         {links.map((link) => (
-          <a key={link.url} href={link.url} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">
+          <a key={link.url} href={link.url} target="_blank" rel="noreferrer" className="text-emerald-600 hover:underline">
             {link.label}
           </a>
         ))}

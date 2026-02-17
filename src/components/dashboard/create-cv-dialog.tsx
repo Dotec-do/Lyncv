@@ -36,10 +36,10 @@ export function CreateCvDialog({ open, onConfirm, onCancel }: CreateCvDialogProp
     <dialog
       ref={dialogRef}
       onClose={onCancel}
-      className="rounded-xl border-none bg-white p-6 shadow-xl backdrop:bg-black/50 max-w-md w-full"
+      className="rounded-2xl border-none bg-white p-6 shadow-2xl backdrop:bg-black/40 backdrop:backdrop-blur-sm max-w-md w-full"
     >
-      <h2 className="text-lg font-semibold text-gray-900">Create New CV</h2>
-      <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+      <h2 className="text-lg font-semibold text-slate-900">Create New CV</h2>
+      <form onSubmit={handleSubmit} className="mt-4 space-y-5">
         <Input
           label="CV Name"
           id="cv-name"
@@ -49,21 +49,21 @@ export function CreateCvDialog({ open, onConfirm, onCancel }: CreateCvDialogProp
           autoFocus
         />
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-700">Template</label>
+          <label className="text-sm font-medium text-slate-700">Template</label>
           <div className="grid grid-cols-2 gap-3">
             {TEMPLATE_LIST.map((tpl) => (
               <button
                 key={tpl.id}
                 type="button"
                 onClick={() => setTemplateId(tpl.id)}
-                className={`rounded-lg border-2 p-3 text-left transition-colors ${
+                className={`rounded-xl border-2 p-4 text-left transition-all duration-200 ${
                   templateId === tpl.id
-                    ? "border-blue-600 bg-blue-50"
-                    : "border-gray-200 hover:border-gray-300"
+                    ? "border-emerald-500 bg-emerald-50 shadow-sm"
+                    : "border-slate-200 hover:border-slate-300 hover:shadow-sm"
                 }`}
               >
-                <div className="text-sm font-medium text-gray-900">{tpl.name}</div>
-                <div className="mt-1 text-xs text-gray-500">{tpl.description}</div>
+                <div className="text-sm font-medium text-slate-800">{tpl.name}</div>
+                <div className="mt-1 text-xs text-slate-500">{tpl.description}</div>
               </button>
             ))}
           </div>

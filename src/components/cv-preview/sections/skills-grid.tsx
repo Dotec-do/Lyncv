@@ -37,7 +37,7 @@ export function SkillsGrid({ items, display = "tags", className = "" }: SkillsGr
                 <span className="font-medium text-gray-700">{item.name}</span>
               </div>
               <div className="h-1.5 rounded-full bg-gray-200">
-                <div className={`h-full rounded-full bg-blue-600 ${levelWidth[item.level]}`} />
+                <div className={`h-full rounded-full bg-emerald-600 ${levelWidth[item.level]}`} />
               </div>
             </div>
           ))}

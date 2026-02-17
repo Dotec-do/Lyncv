@@ -11,15 +11,15 @@ export function SplitPane({ left, right }: SplitPaneProps) {
   return (
     <>
       {/* Mobile tab toggle */}
-      <div className="flex md:hidden border-b border-gray-200 bg-white print:hidden">
+      <div className="flex md:hidden border-b border-slate-200 bg-white print:hidden">
         <button
-          className={`flex-1 py-3 text-sm font-medium transition-colors ${activeTab === "edit" ? "border-b-2 border-blue-600 text-blue-600" : "text-gray-500"}`}
+          className={`flex-1 py-3 text-sm font-medium transition-all duration-200 ${activeTab === "edit" ? "border-b-2 border-emerald-600 text-emerald-600" : "text-slate-400 hover:text-slate-600"}`}
           onClick={() => setActiveTab("edit")}
         >
           Edit
         </button>
         <button
-          className={`flex-1 py-3 text-sm font-medium transition-colors ${activeTab === "preview" ? "border-b-2 border-blue-600 text-blue-600" : "text-gray-500"}`}
+          className={`flex-1 py-3 text-sm font-medium transition-all duration-200 ${activeTab === "preview" ? "border-b-2 border-emerald-600 text-emerald-600" : "text-slate-400 hover:text-slate-600"}`}
           onClick={() => setActiveTab("preview")}
         >
           Preview
@@ -33,10 +33,10 @@ export function SplitPane({ left, right }: SplitPaneProps) {
 
       {/* Desktop split */}
       <div className="hidden md:flex flex-1 overflow-hidden">
-        <div className="w-1/2 overflow-y-auto border-r border-gray-200">
+        <div className="w-1/2 overflow-y-auto border-r border-slate-200">
           {left}
         </div>
-        <div className="w-1/2 overflow-y-auto bg-gray-100">
+        <div className="w-1/2 overflow-y-auto bg-slate-50">
           {right}
         </div>
       </div>

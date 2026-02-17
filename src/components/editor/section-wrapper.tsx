@@ -12,15 +12,15 @@ export function SectionWrapper({ title, action, children, defaultOpen = true }: 
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-b border-gray-200 last:border-b-0">
+    <div className="border-b border-slate-200 last:border-b-0">
       <button
         type="button"
-        className="flex w-full items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors"
+        className="flex w-full items-center justify-between px-4 py-3.5 hover:bg-slate-50 transition-all duration-200"
         onClick={() => setOpen(!open)}
       >
         <SectionHeading title={title} action={action} />
         <svg
-          className={`h-5 w-5 text-gray-400 transition-transform ${open ? "rotate-180" : ""}`}
+          className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

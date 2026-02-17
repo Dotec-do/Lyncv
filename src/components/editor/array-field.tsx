@@ -14,7 +14,7 @@ export function ArrayField<T>({ items, onAdd, onRemove, renderItem, addLabel = "
   return (
     <div className="space-y-4">
       {items.map((item, index) => (
-        <div key={index} className="relative rounded-lg border border-gray-200 p-4">
+        <div key={index} className="relative rounded-xl border border-slate-200 p-4 bg-slate-50/50">
           <div className="absolute right-2 top-2">
             <IconButton
               label="Remove"
@@ -30,7 +30,7 @@ export function ArrayField<T>({ items, onAdd, onRemove, renderItem, addLabel = "
           {renderItem(item, index)}
         </div>
       ))}
-      <Button variant="ghost" size="sm" onClick={onAdd} className="w-full border border-dashed border-gray-300">
+      <Button variant="ghost" size="sm" onClick={onAdd} className="w-full border border-dashed border-slate-300 hover:border-emerald-400 hover:text-emerald-600">
         + {addLabel}
       </Button>
     </div>
