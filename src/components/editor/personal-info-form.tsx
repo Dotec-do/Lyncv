@@ -18,6 +18,7 @@ export function PersonalInfoForm({ data, onChange }: PersonalInfoFormProps) {
         <Input
           label="First Name"
           id="firstName"
+          autoComplete="given-name"
           value={data.firstName}
           onChange={(e) => update("firstName", e.target.value)}
           placeholder="John"
@@ -25,6 +26,7 @@ export function PersonalInfoForm({ data, onChange }: PersonalInfoFormProps) {
         <Input
           label="Last Name"
           id="lastName"
+          autoComplete="family-name"
           value={data.lastName}
           onChange={(e) => update("lastName", e.target.value)}
           placeholder="Doe"
@@ -33,6 +35,7 @@ export function PersonalInfoForm({ data, onChange }: PersonalInfoFormProps) {
           label="Email"
           id="email"
           type="email"
+          autoComplete="email"
           value={data.email}
           onChange={(e) => update("email", e.target.value)}
           placeholder="john@example.com"
@@ -41,6 +44,7 @@ export function PersonalInfoForm({ data, onChange }: PersonalInfoFormProps) {
           label="Phone"
           id="phone"
           type="tel"
+          autoComplete="tel"
           value={data.phone}
           onChange={(e) => update("phone", e.target.value)}
           placeholder="+1 234 567 890"
@@ -48,6 +52,7 @@ export function PersonalInfoForm({ data, onChange }: PersonalInfoFormProps) {
         <Input
           label="Location"
           id="location"
+          autoComplete="address-level2"
           value={data.location}
           onChange={(e) => update("location", e.target.value)}
           placeholder="New York, USA"
@@ -57,6 +62,7 @@ export function PersonalInfoForm({ data, onChange }: PersonalInfoFormProps) {
           label="Website"
           id="website"
           type="url"
+          autoComplete="url"
           value={data.website}
           onChange={(e) => update("website", e.target.value)}
           placeholder="https://mywebsite.com"
@@ -65,6 +71,7 @@ export function PersonalInfoForm({ data, onChange }: PersonalInfoFormProps) {
           label="LinkedIn"
           id="linkedin"
           type="url"
+          autoComplete="url"
           value={data.linkedin}
           onChange={(e) => update("linkedin", e.target.value)}
           placeholder="https://linkedin.com/in/johndoe"
