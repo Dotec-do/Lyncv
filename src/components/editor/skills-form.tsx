@@ -1,0 +1,51 @@
+import type { SkillItem, SkillLevel } from "../../types/cv";
+import { generateId } from "../../lib/id";
+import { SKILL_LEVELS } from "../../lib/constants";
+import { Input } from "../ui/input";
+import { Select } from "../ui/select";
+import { SectionWrapper } from "./section-wrapper";
+import { ArrayField } from "./array-field";
+
+interface SkillsFormProps {
+  items: SkillItem[];
+  onChange: (items: SkillItem[]) => void;
+}
+
+function createEmptySkill(): SkillItem {
+  return { id: generateId(), name: "", level: "intermediate" };
+}
+
+export function SkillsForm({ items, onChange }: SkillsFormProps) {
+  function updateItem(index: number, field: keyof SkillItem, value: string) {
+    const updated = [...items];
+    updated[index] = { ...updated[index], [field]: value };
+    onChange(updated);
+  }
+
+  return (
+    <SectionWrapper title="Skills">
+      <ArrayField
+        items={items}
+        onAdd={() => onChange([...items, createEmptySkill()])}
+        onRemove={(i) => onChange(items.filter((_, idx) => idx !== i))}
+        addLabel="Add skill"
+        renderItem={(item, index) => (
+          <div className="grid grid-cols-2 gap-3 pr-8">
+            <Input
+              label="Skill"
+              value={item.name}
+              onChange={(e) => updateItem(index, "name", e.target.value)}
+              placeholder="React"
+            />
+            <Select
+              label="Level"
+              value={item.level}
+              onChange={(e) => updateItem(index, "level", e.target.value as SkillLevel)}
+              options={SKILL_LEVELS.map((l) => ({ value: l.value, label: l.label }))}
+            />
+          </div>
+        )}
+      />
+    </SectionWrapper>
+  );
+}
