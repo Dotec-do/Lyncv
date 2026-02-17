@@ -29,12 +29,14 @@ export function LanguagesForm({ items, onChange }: LanguagesFormProps) {
         renderItem={(item, index) => (
           <div className="grid grid-cols-2 gap-3 pr-8">
             <Input
+              id={`lang-${item.id}-name`}
               label="Language"
               value={item.name}
               onChange={(e) => updateItem(index, "name", e.target.value)}
               placeholder="English"
             />
             <Select
+              id={`lang-${item.id}-prof`}
               label="Proficiency"
               value={item.proficiency}
               onChange={(e) => updateItem(index, "proficiency", e.target.value as LanguageProficiency)}

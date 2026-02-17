@@ -29,12 +29,14 @@ export function SkillsForm({ items, onChange }: SkillsFormProps) {
         renderItem={(item, index) => (
           <div className="grid grid-cols-2 gap-3 pr-8">
             <Input
+              id={`skill-${item.id}-name`}
               label="Skill"
               value={item.name}
               onChange={(e) => updateItem(index, "name", e.target.value)}
               placeholder="React"
             />
             <Select
+              id={`skill-${item.id}-level`}
               label="Level"
               value={item.level}
               onChange={(e) => updateItem(index, "level", e.target.value as SkillLevel)}

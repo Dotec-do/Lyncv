@@ -44,18 +44,21 @@ export function ExperienceForm({ items, onChange }: ExperienceFormProps) {
           <div className="space-y-3 pr-8">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Input
+                id={`exp-${item.id}-title`}
                 label="Job Title"
                 value={item.jobTitle}
                 onChange={(e) => updateItem(index, "jobTitle", e.target.value)}
                 placeholder="Software Engineer"
               />
               <Input
+                id={`exp-${item.id}-company`}
                 label="Company"
                 value={item.company}
                 onChange={(e) => updateItem(index, "company", e.target.value)}
                 placeholder="Acme Corp"
               />
               <Input
+                id={`exp-${item.id}-location`}
                 label="Location"
                 value={item.location}
                 onChange={(e) => updateItem(index, "location", e.target.value)}
@@ -63,6 +66,7 @@ export function ExperienceForm({ items, onChange }: ExperienceFormProps) {
               />
               <div />
               <Input
+                id={`exp-${item.id}-start`}
                 label="Start Date"
                 type="month"
                 value={item.startDate}
@@ -70,6 +74,7 @@ export function ExperienceForm({ items, onChange }: ExperienceFormProps) {
               />
               {!item.isCurrent && (
                 <Input
+                  id={`exp-${item.id}-end`}
                   label="End Date"
                   type="month"
                   value={item.endDate}
@@ -77,9 +82,9 @@ export function ExperienceForm({ items, onChange }: ExperienceFormProps) {
                 />
               )}
             </div>
-            <label htmlFor={`isCurrent-${item.id}`} className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer select-none">
+            <label htmlFor={`exp-${item.id}-current`} className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer select-none">
               <input
-                id={`isCurrent-${item.id}`}
+                id={`exp-${item.id}-current`}
                 type="checkbox"
                 autoComplete="off"
                 checked={item.isCurrent}
@@ -89,6 +94,7 @@ export function ExperienceForm({ items, onChange }: ExperienceFormProps) {
               Currently working here
             </label>
             <Textarea
+              id={`exp-${item.id}-desc`}
               label="Description"
               value={item.description}
               onChange={(e) => updateItem(index, "description", e.target.value)}

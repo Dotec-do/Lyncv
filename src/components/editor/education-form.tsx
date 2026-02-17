@@ -37,18 +37,21 @@ export function EducationForm({ items, onChange }: EducationFormProps) {
           <div className="space-y-3 pr-8">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Input
+                id={`edu-${item.id}-degree`}
                 label="Degree"
                 value={item.degree}
                 onChange={(e) => updateItem(index, "degree", e.target.value)}
                 placeholder="Bachelor of Science"
               />
               <Input
+                id={`edu-${item.id}-inst`}
                 label="Institution"
                 value={item.institution}
                 onChange={(e) => updateItem(index, "institution", e.target.value)}
                 placeholder="MIT"
               />
               <Input
+                id={`edu-${item.id}-location`}
                 label="Location"
                 value={item.location}
                 onChange={(e) => updateItem(index, "location", e.target.value)}
@@ -56,12 +59,14 @@ export function EducationForm({ items, onChange }: EducationFormProps) {
               />
               <div />
               <Input
+                id={`edu-${item.id}-start`}
                 label="Start Date"
                 type="month"
                 value={item.startDate}
                 onChange={(e) => updateItem(index, "startDate", e.target.value)}
               />
               <Input
+                id={`edu-${item.id}-end`}
                 label="End Date"
                 type="month"
                 value={item.endDate}
@@ -69,6 +74,7 @@ export function EducationForm({ items, onChange }: EducationFormProps) {
               />
             </div>
             <Textarea
+              id={`edu-${item.id}-desc`}
               label="Description"
               value={item.description}
               onChange={(e) => updateItem(index, "description", e.target.value)}
