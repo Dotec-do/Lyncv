@@ -77,9 +77,11 @@ export function ExperienceForm({ items, onChange }: ExperienceFormProps) {
                 />
               )}
             </div>
-            <label className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer select-none">
+            <label htmlFor={`isCurrent-${item.id}`} className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer select-none">
               <input
+                id={`isCurrent-${item.id}`}
                 type="checkbox"
+                autoComplete="off"
                 checked={item.isCurrent}
                 onChange={(e) => updateItem(index, "isCurrent", e.target.checked)}
                 className="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
