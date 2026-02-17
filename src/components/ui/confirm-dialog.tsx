@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useId } from "react";
+import { useDialog } from "../../hooks/use-dialog";
 import { Button } from "./button";
 
 interface ConfirmDialogProps {
@@ -18,22 +19,17 @@ export function ConfirmDialog({
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-    if (open && !dialog.open) dialog.showModal();
-    if (!open && dialog.open) dialog.close();
-  }, [open]);
+  const dialogRef = useDialog(open);
+  const titleId = useId();
 
   return (
     <dialog
       ref={dialogRef}
       onClose={onCancel}
+      aria-labelledby={titleId}
       className="rounded-2xl border-none bg-white p-6 shadow-2xl backdrop:bg-black/40 backdrop:backdrop-blur-sm max-w-sm w-full"
     >
-      <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
+      <h2 id={titleId} className="text-lg font-semibold text-gray-900">{title}</h2>
       <p className="mt-2 text-sm text-gray-600">{message}</p>
       <div className="mt-6 flex justify-end gap-3">
         <Button variant="secondary" onClick={onCancel}>

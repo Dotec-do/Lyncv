@@ -1,5 +1,5 @@
 import type { TemplateConfig, TemplateId } from "../types/template";
-import type { CvData, PersonalInfo } from "../types/cv";
+import type { CvData, PersonalInfo, SkillLevel, LanguageProficiency } from "../types/cv";
 import { generateId } from "./id";
 import { nowISO } from "./date";
 
@@ -64,3 +64,18 @@ export const LANGUAGE_PROFICIENCIES = [
   { value: "full-professional", label: "Full Professional" },
   { value: "native", label: "Native" },
 ] as const;
+
+export const SKILL_LEVEL_WIDTH: Record<SkillLevel, string> = {
+  beginner: "w-1/4",
+  intermediate: "w-1/2",
+  advanced: "w-3/4",
+  expert: "w-full",
+};
+
+export const PROFICIENCY_LABELS: Record<LanguageProficiency, string> = {
+  elementary: "Elementary",
+  "limited-working": "Limited Working",
+  "professional-working": "Professional Working",
+  "full-professional": "Full Professional",
+  native: "Native",
+};

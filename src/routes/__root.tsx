@@ -1,5 +1,6 @@
 import { createRootRoute, Outlet, Link } from "@tanstack/react-router";
 import { CvProvider } from "../context/cv-context";
+import { ErrorBoundary } from "../components/ui/error-boundary";
 import { Navbar } from "../components/layout/navbar";
 
 export const Route = createRootRoute({
@@ -12,7 +13,11 @@ function RootLayout() {
     <CvProvider>
       <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
         <Navbar />
-        <Outlet />
+        <ErrorBoundary>
+          <main id="main-content">
+            <Outlet />
+          </main>
+        </ErrorBoundary>
       </div>
     </CvProvider>
   );

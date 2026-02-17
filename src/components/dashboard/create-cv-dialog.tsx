@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useId } from "react";
+import { useDialog } from "../../hooks/use-dialog";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { TEMPLATE_LIST } from "../../lib/constants";
@@ -11,19 +12,17 @@ interface CreateCvDialogProps {
 }
 
 export function CreateCvDialog({ open, onConfirm, onCancel }: CreateCvDialogProps) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
+  const dialogRef = useDialog(open);
+  const titleId = useId();
   const [name, setName] = useState("");
   const [templateId, setTemplateId] = useState<TemplateId>("classic");
 
+  // Reset form state when dialog opens
   useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-    if (open && !dialog.open) {
+    if (open) {
       setName("");
       setTemplateId("classic");
-      dialog.showModal();
     }
-    if (!open && dialog.open) dialog.close();
   }, [open]);
 
   function handleSubmit(e: React.FormEvent) {
@@ -36,9 +35,10 @@ export function CreateCvDialog({ open, onConfirm, onCancel }: CreateCvDialogProp
     <dialog
       ref={dialogRef}
       onClose={onCancel}
+      aria-labelledby={titleId}
       className="rounded-2xl border-none bg-white p-6 shadow-2xl backdrop:bg-black/40 backdrop:backdrop-blur-sm max-w-md w-full"
     >
-      <h2 className="text-lg font-semibold text-slate-900">Create New CV</h2>
+      <h2 id={titleId} className="text-lg font-semibold text-slate-900">Create New CV</h2>
       <form onSubmit={handleSubmit} className="mt-4 space-y-5">
         <Input
           label="CV Name"

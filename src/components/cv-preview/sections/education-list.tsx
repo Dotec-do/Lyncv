@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { EducationItem } from "../../../types/cv";
 import { formatDate } from "../../../lib/date";
 
@@ -6,7 +7,7 @@ interface EducationListProps {
   className?: string;
 }
 
-export function EducationList({ items, className = "" }: EducationListProps) {
+export const EducationList = memo(function EducationList({ items, className = "" }: EducationListProps) {
   if (items.length === 0) return null;
   return (
     <div className={className}>
@@ -33,4 +34,4 @@ export function EducationList({ items, className = "" }: EducationListProps) {
       </div>
     </div>
   );
-}
+});

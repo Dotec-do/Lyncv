@@ -1,6 +1,7 @@
 import type { LanguageItem, LanguageProficiency } from "../../types/cv";
 import { generateId } from "../../lib/id";
 import { LANGUAGE_PROFICIENCIES } from "../../lib/constants";
+import { useArrayItemUpdate } from "../../hooks/use-array-update";
 import { Input } from "../ui/input";
 import { Select } from "../ui/select";
 import { SectionWrapper } from "./section-wrapper";
@@ -16,11 +17,7 @@ function createEmptyLanguage(): LanguageItem {
 }
 
 export function LanguagesForm({ items, onChange }: LanguagesFormProps) {
-  function updateItem(index: number, field: keyof LanguageItem, value: string) {
-    const updated = [...items];
-    updated[index] = { ...updated[index], [field]: value };
-    onChange(updated);
-  }
+  const updateItem = useArrayItemUpdate(items, onChange);
 
   return (
     <SectionWrapper title="Languages">

@@ -77,12 +77,12 @@ export function ExperienceForm({ items, onChange }: ExperienceFormProps) {
                 />
               )}
             </div>
-            <label className="flex items-center gap-2 text-sm">
+            <label className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={item.isCurrent}
                 onChange={(e) => updateItem(index, "isCurrent", e.target.checked)}
-                className="rounded border-gray-300"
+                className="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
               />
               Currently working here
             </label>

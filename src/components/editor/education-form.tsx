@@ -1,5 +1,6 @@
 import type { EducationItem } from "../../types/cv";
 import { generateId } from "../../lib/id";
+import { useArrayItemUpdate } from "../../hooks/use-array-update";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { SectionWrapper } from "./section-wrapper";
@@ -23,11 +24,7 @@ function createEmptyEducation(): EducationItem {
 }
 
 export function EducationForm({ items, onChange }: EducationFormProps) {
-  function updateItem(index: number, field: keyof EducationItem, value: string) {
-    const updated = [...items];
-    updated[index] = { ...updated[index], [field]: value };
-    onChange(updated);
-  }
+  const updateItem = useArrayItemUpdate(items, onChange);
 
   return (
     <SectionWrapper title="Education">

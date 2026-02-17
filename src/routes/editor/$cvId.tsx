@@ -22,27 +22,38 @@ function EditorPage() {
   const { cv, updateCv } = useCv(cvId);
   const previewRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const cvRef = useRef(cv);
+  cvRef.current = cv;
   const [scale, setScale] = useState(0.5);
 
-  // Scale preview to fit container
+  // Scale preview to fit container (debounced)
   useEffect(() => {
-    function handleResize() {
+    function computeScale() {
       if (!containerRef.current) return;
       const containerWidth = containerRef.current.clientWidth - 32;
       const a4Width = 794;
       setScale(Math.min(containerWidth / a4Width, 1));
     }
-    handleResize();
+    computeScale();
+    let timerId: ReturnType<typeof setTimeout>;
+    function handleResize() {
+      clearTimeout(timerId);
+      timerId = setTimeout(computeScale, 150);
+    }
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(timerId);
+    };
   }, []);
 
+  // Stable callback: uses ref to avoid re-renders from cv dependency
   const updateField = useCallback(
     <K extends keyof CvData>(field: K, value: CvData[K]) => {
-      if (!cv) return;
-      updateCv({ ...cv, [field]: value });
+      if (!cvRef.current) return;
+      updateCv({ ...cvRef.current, [field]: value });
     },
-    [cv, updateCv],
+    [updateCv],
   );
 
   if (!cv) {

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { ExperienceItem } from "../../../types/cv";
 import { formatDate } from "../../../lib/date";
 
@@ -6,7 +7,7 @@ interface ExperienceListProps {
   className?: string;
 }
 
-export function ExperienceList({ items, className = "" }: ExperienceListProps) {
+export const ExperienceList = memo(function ExperienceList({ items, className = "" }: ExperienceListProps) {
   if (items.length === 0) return null;
   return (
     <div className={className}>
@@ -35,4 +36,4 @@ export function ExperienceList({ items, className = "" }: ExperienceListProps) {
       </div>
     </div>
   );
-}
+});

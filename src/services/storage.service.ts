@@ -15,7 +15,11 @@ export function loadCvList(): CvData[] {
 }
 
 export function saveCvList(list: CvData[]): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  } catch (err) {
+    console.error("Failed to save CV list (storage quota exceeded?):", err);
+  }
 }
 
 export function loadCv(id: string): CvData | undefined {

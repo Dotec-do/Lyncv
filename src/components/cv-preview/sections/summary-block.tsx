@@ -1,9 +1,11 @@
+import { memo } from "react";
+
 interface SummaryBlockProps {
   content: string;
   className?: string;
 }
 
-export function SummaryBlock({ content, className = "" }: SummaryBlockProps) {
+export const SummaryBlock = memo(function SummaryBlock({ content, className = "" }: SummaryBlockProps) {
   if (!content) return null;
   return (
     <div className={className}>
@@ -13,4 +15,4 @@ export function SummaryBlock({ content, className = "" }: SummaryBlockProps) {
       <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{content}</p>
     </div>
   );
-}
+});

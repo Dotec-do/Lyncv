@@ -1,4 +1,6 @@
-import type { SkillItem, SkillLevel } from "../../../types/cv";
+import { memo } from "react";
+import type { SkillItem } from "../../../types/cv";
+import { SKILL_LEVEL_WIDTH } from "../../../lib/constants";
 
 interface SkillsGridProps {
   items: SkillItem[];
@@ -6,14 +8,7 @@ interface SkillsGridProps {
   className?: string;
 }
 
-const levelWidth: Record<SkillLevel, string> = {
-  beginner: "w-1/4",
-  intermediate: "w-1/2",
-  advanced: "w-3/4",
-  expert: "w-full",
-};
-
-export function SkillsGrid({ items, display = "tags", className = "" }: SkillsGridProps) {
+export const SkillsGrid = memo(function SkillsGrid({ items, display = "tags", className = "" }: SkillsGridProps) {
   if (items.length === 0) return null;
 
   return (
@@ -37,7 +32,7 @@ export function SkillsGrid({ items, display = "tags", className = "" }: SkillsGr
                 <span className="font-medium text-gray-700">{item.name}</span>
               </div>
               <div className="h-1.5 rounded-full bg-gray-200">
-                <div className={`h-full rounded-full bg-emerald-600 ${levelWidth[item.level]}`} />
+                <div className={`h-full rounded-full bg-emerald-600 ${SKILL_LEVEL_WIDTH[item.level]}`} />
               </div>
             </div>
           ))}
@@ -45,4 +40,4 @@ export function SkillsGrid({ items, display = "tags", className = "" }: SkillsGr
       )}
     </div>
   );
-}
+});

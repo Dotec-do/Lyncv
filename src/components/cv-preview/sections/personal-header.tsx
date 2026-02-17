@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { PersonalInfo } from "../../../types/cv";
 
 interface PersonalHeaderProps {
@@ -6,7 +7,7 @@ interface PersonalHeaderProps {
   className?: string;
 }
 
-export function PersonalHeader({ data, layout = "inline", className = "" }: PersonalHeaderProps) {
+export const PersonalHeader = memo(function PersonalHeader({ data, layout = "inline", className = "" }: PersonalHeaderProps) {
   const fullName = `${data.firstName} ${data.lastName}`.trim();
   const contactItems = [data.email, data.phone, data.location].filter(Boolean);
   const links = [
@@ -20,8 +21,8 @@ export function PersonalHeader({ data, layout = "inline", className = "" }: Pers
     <div className={className}>
       {fullName && <h1 className="text-2xl font-bold">{fullName}</h1>}
       <div className={`mt-1 text-sm text-gray-600 ${layout === "inline" ? "flex flex-wrap gap-x-3 gap-y-1" : "flex flex-col gap-1"}`}>
-        {contactItems.map((item, i) => (
-          <span key={i}>{item}</span>
+        {contactItems.map((item) => (
+          <span key={item}>{item}</span>
         ))}
         {links.map((link) => (
           <a key={link.url} href={link.url} target="_blank" rel="noreferrer" className="text-emerald-600 hover:underline">
@@ -31,4 +32,4 @@ export function PersonalHeader({ data, layout = "inline", className = "" }: Pers
       </div>
     </div>
   );
-}
+});
