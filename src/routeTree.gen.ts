@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from "./routes/__root"
 import { Route as EditorRouteRouteImport } from "./routes/editor/route"
 import { Route as IndexRouteImport } from "./routes/index"
+import { Route as EditorNewRouteImport } from "./routes/editor/new"
+import { Route as EditorCvIdRouteImport } from "./routes/editor/$cvId"
 
 const EditorRouteRoute = EditorRouteRouteImport.update({
   id: "/editor",
@@ -22,31 +24,47 @@ const IndexRoute = IndexRouteImport.update({
   path: "/",
   getParentRoute: () => rootRouteImport,
 } as any)
+const EditorNewRoute = EditorNewRouteImport.update({
+  id: "/new",
+  path: "/new",
+  getParentRoute: () => EditorRouteRoute,
+} as any)
+const EditorCvIdRoute = EditorCvIdRouteImport.update({
+  id: "/$cvId",
+  path: "/$cvId",
+  getParentRoute: () => EditorRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
-  "/editor": typeof EditorRouteRoute
+  "/editor": typeof EditorRouteRouteWithChildren
+  "/editor/$cvId": typeof EditorCvIdRoute
+  "/editor/new": typeof EditorNewRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
-  "/editor": typeof EditorRouteRoute
+  "/editor": typeof EditorRouteRouteWithChildren
+  "/editor/$cvId": typeof EditorCvIdRoute
+  "/editor/new": typeof EditorNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/": typeof IndexRoute
-  "/editor": typeof EditorRouteRoute
+  "/editor": typeof EditorRouteRouteWithChildren
+  "/editor/$cvId": typeof EditorCvIdRoute
+  "/editor/new": typeof EditorNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/editor"
+  fullPaths: "/" | "/editor" | "/editor/$cvId" | "/editor/new"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/editor"
-  id: "__root__" | "/" | "/editor"
+  to: "/" | "/editor" | "/editor/$cvId" | "/editor/new"
+  id: "__root__" | "/" | "/editor" | "/editor/$cvId" | "/editor/new"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  EditorRouteRoute: typeof EditorRouteRoute
+  EditorRouteRoute: typeof EditorRouteRouteWithChildren
 }
 
 declare module "@tanstack/react-router" {
@@ -65,12 +83,40 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/editor/new": {
+      id: "/editor/new"
+      path: "/new"
+      fullPath: "/editor/new"
+      preLoaderRoute: typeof EditorNewRouteImport
+      parentRoute: typeof EditorRouteRoute
+    }
+    "/editor/$cvId": {
+      id: "/editor/$cvId"
+      path: "/$cvId"
+      fullPath: "/editor/$cvId"
+      preLoaderRoute: typeof EditorCvIdRouteImport
+      parentRoute: typeof EditorRouteRoute
+    }
   }
 }
 
+interface EditorRouteRouteChildren {
+  EditorCvIdRoute: typeof EditorCvIdRoute
+  EditorNewRoute: typeof EditorNewRoute
+}
+
+const EditorRouteRouteChildren: EditorRouteRouteChildren = {
+  EditorCvIdRoute: EditorCvIdRoute,
+  EditorNewRoute: EditorNewRoute,
+}
+
+const EditorRouteRouteWithChildren = EditorRouteRoute._addFileChildren(
+  EditorRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  EditorRouteRoute: EditorRouteRoute,
+  EditorRouteRoute: EditorRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
