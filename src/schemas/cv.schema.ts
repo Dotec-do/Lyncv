@@ -1,21 +1,21 @@
 import { z } from "zod";
 
 export const personalInfoSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  email: z.string().email("Invalid email address").or(z.literal("")),
+  firstName: z.string(),
+  lastName: z.string(),
+  email: z.string(),
   phone: z.string(),
   location: z.string(),
-  website: z.string().url("Invalid URL").or(z.literal("")),
-  linkedin: z.string().url("Invalid URL").or(z.literal("")),
+  website: z.string(),
+  linkedin: z.string(),
 });
 
 export const experienceItemSchema = z.object({
   id: z.string(),
-  jobTitle: z.string().min(1, "Job title is required"),
-  company: z.string().min(1, "Company is required"),
+  jobTitle: z.string(),
+  company: z.string(),
   location: z.string(),
-  startDate: z.string().min(1, "Start date is required"),
+  startDate: z.string(),
   endDate: z.string(),
   isCurrent: z.boolean(),
   description: z.string(),
@@ -23,8 +23,8 @@ export const experienceItemSchema = z.object({
 
 export const educationItemSchema = z.object({
   id: z.string(),
-  degree: z.string().min(1, "Degree is required"),
-  institution: z.string().min(1, "Institution is required"),
+  degree: z.string(),
+  institution: z.string(),
   location: z.string(),
   startDate: z.string(),
   endDate: z.string(),
@@ -33,13 +33,13 @@ export const educationItemSchema = z.object({
 
 export const skillItemSchema = z.object({
   id: z.string(),
-  name: z.string().min(1, "Skill name is required"),
+  name: z.string(),
   level: z.enum(["beginner", "intermediate", "advanced", "expert"]),
 });
 
 export const languageItemSchema = z.object({
   id: z.string(),
-  name: z.string().min(1, "Language name is required"),
+  name: z.string(),
   proficiency: z.enum([
     "elementary",
     "limited-working",
