@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type { PersonalInfo } from "../../types/cv";
 import { Input } from "../ui/input";
 import { SectionWrapper } from "./section-wrapper";
@@ -8,73 +9,75 @@ interface PersonalInfoFormProps {
 }
 
 export function PersonalInfoForm({ data, onChange }: PersonalInfoFormProps) {
+  const { t } = useTranslation();
+
   function update(field: keyof PersonalInfo, value: string) {
     onChange({ ...data, [field]: value });
   }
 
   return (
-    <SectionWrapper title="Personal Info">
+    <SectionWrapper title={t("sections.personalInfo")}>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <Input
-          label="First Name"
+          label={t("fields.firstName")}
           id="firstName"
           autoComplete="given-name"
           value={data.firstName}
           onChange={(e) => update("firstName", e.target.value)}
-          placeholder="John"
+          placeholder={t("placeholders.firstName")}
         />
         <Input
-          label="Last Name"
+          label={t("fields.lastName")}
           id="lastName"
           autoComplete="family-name"
           value={data.lastName}
           onChange={(e) => update("lastName", e.target.value)}
-          placeholder="Doe"
+          placeholder={t("placeholders.lastName")}
         />
         <Input
-          label="Email"
+          label={t("fields.email")}
           id="email"
           type="email"
           autoComplete="email"
           value={data.email}
           onChange={(e) => update("email", e.target.value)}
-          placeholder="john@example.com"
+          placeholder={t("placeholders.email")}
         />
         <Input
-          label="Phone"
+          label={t("fields.phone")}
           id="phone"
           type="tel"
           autoComplete="tel"
           value={data.phone}
           onChange={(e) => update("phone", e.target.value)}
-          placeholder="+1 234 567 890"
+          placeholder={t("placeholders.phone")}
         />
         <Input
-          label="Location"
+          label={t("fields.location")}
           id="location"
           autoComplete="address-level2"
           value={data.location}
           onChange={(e) => update("location", e.target.value)}
-          placeholder="New York, USA"
+          placeholder={t("placeholders.location")}
           className="sm:col-span-2"
         />
         <Input
-          label="Website"
+          label={t("fields.website")}
           id="website"
           type="url"
           autoComplete="url"
           value={data.website}
           onChange={(e) => update("website", e.target.value)}
-          placeholder="https://mywebsite.com"
+          placeholder={t("placeholders.website")}
         />
         <Input
-          label="LinkedIn"
+          label={t("fields.linkedin")}
           id="linkedin"
           type="url"
           autoComplete="url"
           value={data.linkedin}
           onChange={(e) => update("linkedin", e.target.value)}
-          placeholder="https://linkedin.com/in/johndoe"
+          placeholder={t("placeholders.linkedin")}
         />
       </div>
     </SectionWrapper>

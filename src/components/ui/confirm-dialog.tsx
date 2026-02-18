@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { useTranslation } from "react-i18next";
 import { useDialog } from "../../hooks/use-dialog";
 import { Button } from "./button";
 
@@ -15,12 +16,13 @@ export function ConfirmDialog({
   open,
   title,
   message,
-  confirmLabel = "Delete",
+  confirmLabel,
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) {
   const dialogRef = useDialog(open);
   const titleId = useId();
+  const { t } = useTranslation();
 
   return (
     <dialog
@@ -33,10 +35,10 @@ export function ConfirmDialog({
       <p className="mt-2 text-sm text-gray-600">{message}</p>
       <div className="mt-6 flex justify-end gap-3">
         <Button variant="secondary" onClick={onCancel}>
-          Cancel
+          {t("actions.cancel")}
         </Button>
         <Button variant="danger" onClick={onConfirm}>
-          {confirmLabel}
+          {confirmLabel ?? t("actions.delete")}
         </Button>
       </div>
     </dialog>

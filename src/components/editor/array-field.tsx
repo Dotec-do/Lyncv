@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "../ui/button";
 import { IconButton } from "../ui/icon-button";
 
@@ -10,14 +11,16 @@ interface ArrayFieldProps<T extends { id: string }> {
   addLabel?: string;
 }
 
-export function ArrayField<T extends { id: string }>({ items, onAdd, onRemove, renderItem, addLabel = "Add item" }: ArrayFieldProps<T>) {
+export function ArrayField<T extends { id: string }>({ items, onAdd, onRemove, renderItem, addLabel }: ArrayFieldProps<T>) {
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-4">
       {items.map((item, index) => (
         <div key={item.id} className="relative rounded-xl border border-slate-200 p-4 bg-slate-50/50">
           <div className="absolute right-2 top-2">
             <IconButton
-              label="Remove"
+              label={t("actions.remove")}
               onClick={() => onRemove(index)}
               className="text-red-400 hover:text-red-600 hover:bg-red-50"
               icon={

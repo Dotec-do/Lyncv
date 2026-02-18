@@ -1,10 +1,9 @@
 import { Link } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import type { CvData } from "../../types/cv";
-import { TEMPLATES } from "../../lib/constants";
 import { Card } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { IconButton } from "../ui/icon-button";
-import type { TemplateId } from "../../types/template";
 
 interface CvCardProps {
   cv: CvData;
@@ -13,7 +12,7 @@ interface CvCardProps {
 }
 
 export function CvCard({ cv, onDelete, onDuplicate }: CvCardProps) {
-  const template = TEMPLATES[cv.templateId as TemplateId];
+  const { t } = useTranslation();
   const updatedDate = new Date(cv.updatedAt).toLocaleDateString();
 
   return (
@@ -27,9 +26,9 @@ export function CvCard({ cv, onDelete, onDuplicate }: CvCardProps) {
           >
             {cv.name}
           </Link>
-          <p className="mt-1 text-xs text-slate-400">Updated {updatedDate}</p>
+          <p className="mt-1 text-xs text-slate-400">{t("dashboard.updated", { date: updatedDate })}</p>
         </div>
-        <Badge variant="emerald">{template?.name ?? cv.templateId}</Badge>
+        <Badge variant="emerald">{t(`templates.${cv.templateId}`)}</Badge>
       </div>
 
       <div className="flex items-center gap-2 border-t border-slate-100 pt-3">
@@ -38,17 +37,17 @@ export function CvCard({ cv, onDelete, onDuplicate }: CvCardProps) {
           params={{ cvId: cv.id }}
           className="flex-1 rounded-lg bg-emerald-600 px-3 py-1.5 text-center text-sm font-medium text-white hover:bg-emerald-700 transition-all duration-200 shadow-sm hover:shadow-md"
         >
-          Edit
+          {t("actions.edit")}
         </Link>
         <Link
           to="/preview/$cvId"
           params={{ cvId: cv.id }}
           className="flex-1 rounded-lg bg-slate-100 px-3 py-1.5 text-center text-sm font-medium text-slate-700 hover:bg-slate-200 transition-all duration-200 border border-slate-200"
         >
-          Preview
+          {t("actions.preview")}
         </Link>
         <IconButton
-          label="Duplicate"
+          label={t("actions.duplicate")}
           onClick={onDuplicate}
           icon={
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,7 +56,7 @@ export function CvCard({ cv, onDelete, onDuplicate }: CvCardProps) {
           }
         />
         <IconButton
-          label="Delete"
+          label={t("actions.delete")}
           onClick={onDelete}
           className="text-red-400 hover:text-red-600 hover:bg-red-50"
           icon={

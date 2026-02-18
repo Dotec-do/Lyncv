@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import type { ExperienceItem } from "../../../types/cv";
 import { formatDate } from "../../../lib/date";
 
@@ -8,11 +9,12 @@ interface ExperienceListProps {
 }
 
 export const ExperienceList = memo(function ExperienceList({ items, className = "" }: ExperienceListProps) {
+  const { t } = useTranslation();
   if (items.length === 0) return null;
   return (
     <div className={className}>
       <h2 className="text-sm font-bold uppercase tracking-wider text-gray-800 mb-3">
-        Experience
+        {t("sections.experience")}
       </h2>
       <div className="space-y-4">
         {items.map((item) => (
@@ -20,7 +22,7 @@ export const ExperienceList = memo(function ExperienceList({ items, className = 
             <div className="flex items-baseline justify-between gap-2">
               <h3 className="text-sm font-semibold text-gray-900">{item.jobTitle}</h3>
               <span className="text-xs text-gray-500 shrink-0">
-                {formatDate(item.startDate)} &ndash; {item.isCurrent ? "Present" : formatDate(item.endDate)}
+                {formatDate(item.startDate)} &ndash; {item.isCurrent ? t("cv.present") : formatDate(item.endDate)}
               </span>
             </div>
             <p className="text-sm text-gray-600">

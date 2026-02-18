@@ -1,5 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { PageShell } from "../components/layout/page-shell";
 import { Button } from "../components/ui/button";
 import { ConfirmDialog } from "../components/ui/confirm-dialog";
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const { cvList, addCv, deleteCv, duplicateCv } = useCvList();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [showCreate, setShowCreate] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
@@ -35,11 +37,11 @@ function HomePage() {
     <PageShell>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Your CVs</h1>
-          <p className="mt-1 text-slate-500">Create and manage your resumes</p>
+          <h1 className="text-3xl font-bold text-slate-900">{t("dashboard.title")}</h1>
+          <p className="mt-1 text-slate-500">{t("dashboard.subtitle")}</p>
         </div>
         <Button onClick={() => setShowCreate(true)}>
-          + New CV
+          {t("dashboard.newCv")}
         </Button>
       </div>
 
@@ -48,10 +50,10 @@ function HomePage() {
           <svg className="h-14 w-14 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
-          <h3 className="mt-4 text-lg font-medium text-slate-800">No CVs yet</h3>
-          <p className="mt-1 text-sm text-slate-400">Get started by creating your first CV</p>
+          <h3 className="mt-4 text-lg font-medium text-slate-800">{t("dashboard.noCvs")}</h3>
+          <p className="mt-1 text-sm text-slate-400">{t("dashboard.noCvsDesc")}</p>
           <Button className="mt-4" onClick={() => setShowCreate(true)}>
-            Create your first CV
+            {t("dashboard.createFirst")}
           </Button>
         </div>
       ) : (
@@ -74,8 +76,8 @@ function HomePage() {
       />
       <ConfirmDialog
         open={deleteTarget !== null}
-        title="Delete CV"
-        message="Are you sure you want to delete this CV? This action cannot be undone."
+        title={t("dialogs.deleteTitle")}
+        message={t("dialogs.deleteMessage")}
         onConfirm={handleDelete}
         onCancel={() => setDeleteTarget(null)}
       />

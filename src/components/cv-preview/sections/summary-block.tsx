@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 
 interface SummaryBlockProps {
   content: string;
@@ -6,11 +7,12 @@ interface SummaryBlockProps {
 }
 
 export const SummaryBlock = memo(function SummaryBlock({ content, className = "" }: SummaryBlockProps) {
+  const { t } = useTranslation();
   if (!content) return null;
   return (
     <div className={className}>
       <h2 className="text-sm font-bold uppercase tracking-wider text-gray-800 mb-2">
-        Summary
+        {t("sections.summary")}
       </h2>
       <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{content}</p>
     </div>

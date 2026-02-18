@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type { SkillItem, SkillLevel } from "../../types/cv";
 import { generateId } from "../../lib/id";
 import { SKILL_LEVELS } from "../../lib/constants";
@@ -17,30 +18,31 @@ function createEmptySkill(): SkillItem {
 }
 
 export function SkillsForm({ items, onChange }: SkillsFormProps) {
+  const { t } = useTranslation();
   const updateItem = useArrayItemUpdate(items, onChange);
 
   return (
-    <SectionWrapper title="Skills">
+    <SectionWrapper title={t("sections.skills")}>
       <ArrayField
         items={items}
         onAdd={() => onChange([...items, createEmptySkill()])}
         onRemove={(i) => onChange(items.filter((_, idx) => idx !== i))}
-        addLabel="Add skill"
+        addLabel={t("actions.addSkill")}
         renderItem={(item, index) => (
           <div className="grid grid-cols-2 gap-3 pr-8">
             <Input
               id={`skill-${item.id}-name`}
-              label="Skill"
+              label={t("fields.skill")}
               value={item.name}
               onChange={(e) => updateItem(index, "name", e.target.value)}
-              placeholder="React"
+              placeholder={t("placeholders.skill")}
             />
             <Select
               id={`skill-${item.id}-level`}
-              label="Level"
+              label={t("fields.level")}
               value={item.level}
               onChange={(e) => updateItem(index, "level", e.target.value as SkillLevel)}
-              options={SKILL_LEVELS.map((l) => ({ value: l.value, label: l.label }))}
+              options={SKILL_LEVELS.map((l) => ({ value: l.value, label: t(`skillLevels.${l.value}`) }))}
             />
           </div>
         )}

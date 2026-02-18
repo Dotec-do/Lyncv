@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Textarea } from "../ui/textarea";
 import { SectionWrapper } from "./section-wrapper";
 
@@ -7,13 +8,15 @@ interface SummaryFormProps {
 }
 
 export function SummaryForm({ value, onChange }: SummaryFormProps) {
+  const { t } = useTranslation();
+
   return (
-    <SectionWrapper title="Summary">
+    <SectionWrapper title={t("sections.summary")}>
       <Textarea
         id="summary"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="A brief professional summary..."
+        placeholder={t("placeholders.summary")}
         rows={4}
       />
     </SectionWrapper>

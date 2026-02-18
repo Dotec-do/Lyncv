@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import type { SkillItem } from "../../../types/cv";
 import { SKILL_LEVEL_WIDTH } from "../../../lib/constants";
 
@@ -9,12 +10,13 @@ interface SkillsGridProps {
 }
 
 export const SkillsGrid = memo(function SkillsGrid({ items, display = "tags", className = "" }: SkillsGridProps) {
+  const { t } = useTranslation();
   if (items.length === 0) return null;
 
   return (
     <div className={className}>
       <h2 className="text-sm font-bold uppercase tracking-wider text-gray-800 mb-2">
-        Skills
+        {t("sections.skills")}
       </h2>
       {display === "tags" ? (
         <div className="flex flex-wrap gap-2">

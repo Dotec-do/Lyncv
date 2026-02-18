@@ -1,4 +1,5 @@
 import { createRootRoute, Outlet, Link } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { CvProvider } from "../context/cv-context";
 import { ErrorBoundary } from "../components/ui/error-boundary";
 import { Navbar } from "../components/layout/navbar";
@@ -24,12 +25,13 @@ function RootLayout() {
 }
 
 function NotFound() {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
       <h1 className="text-6xl font-bold text-slate-200">404</h1>
-      <p className="text-slate-500">Page not found</p>
+      <p className="text-slate-500">{t("errors.notFound")}</p>
       <Link to="/" className="text-emerald-600 hover:underline">
-        Back to Dashboard
+        {t("editor.backToDashboard")}
       </Link>
     </div>
   );

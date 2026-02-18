@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { TEMPLATE_LIST } from "../../lib/constants";
 import type { TemplateId } from "../../types/template";
 
@@ -7,6 +8,8 @@ interface TemplateSelectorProps {
 }
 
 export function TemplateSelector({ value, onChange }: TemplateSelectorProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="flex gap-2 px-4 py-3 border-b border-slate-200 bg-slate-50/50">
       {TEMPLATE_LIST.map((tpl) => (
@@ -20,7 +23,7 @@ export function TemplateSelector({ value, onChange }: TemplateSelectorProps) {
               : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
           }`}
         >
-          {tpl.name}
+          {t(`templates.${tpl.id}`)}
         </button>
       ))}
     </div>

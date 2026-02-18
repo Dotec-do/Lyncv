@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import type { PersonalInfo } from "../../../types/cv";
 
 interface PersonalHeaderProps {
@@ -8,11 +9,12 @@ interface PersonalHeaderProps {
 }
 
 export const PersonalHeader = memo(function PersonalHeader({ data, layout = "inline", className = "" }: PersonalHeaderProps) {
+  const { t } = useTranslation();
   const fullName = `${data.firstName} ${data.lastName}`.trim();
   const contactItems = [data.email, data.phone, data.location].filter(Boolean);
   const links = [
-    data.website && { label: "Website", url: data.website },
-    data.linkedin && { label: "LinkedIn", url: data.linkedin },
+    data.website && { label: t("cv.website"), url: data.website },
+    data.linkedin && { label: t("cv.linkedin"), url: data.linkedin },
   ].filter(Boolean) as { label: string; url: string }[];
 
   if (!fullName && contactItems.length === 0) return null;

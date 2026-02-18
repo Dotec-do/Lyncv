@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import type { EducationItem } from "../../../types/cv";
 import { formatDate } from "../../../lib/date";
 
@@ -8,11 +9,12 @@ interface EducationListProps {
 }
 
 export const EducationList = memo(function EducationList({ items, className = "" }: EducationListProps) {
+  const { t } = useTranslation();
   if (items.length === 0) return null;
   return (
     <div className={className}>
       <h2 className="text-sm font-bold uppercase tracking-wider text-gray-800 mb-3">
-        Education
+        {t("sections.education")}
       </h2>
       <div className="space-y-3">
         {items.map((item) => (

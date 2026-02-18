@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useRef, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useCv } from "../../hooks/use-cv";
 import { SplitPane } from "../../components/layout/split-pane";
 import { CvDocument } from "../../components/cv-preview/cv-document";
@@ -20,6 +21,7 @@ export const Route = createFileRoute("/editor/$cvId")({
 function EditorPage() {
   const { cvId } = Route.useParams();
   const { cv, updateCv } = useCv(cvId);
+  const { t } = useTranslation();
   const previewRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const cvRef = useRef(cv);
@@ -59,9 +61,9 @@ function EditorPage() {
   if (!cv) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
-        <p className="text-slate-500">CV not found</p>
+        <p className="text-slate-500">{t("editor.notFound")}</p>
         <Link to="/" className="text-emerald-600 hover:underline">
-          Back to Dashboard
+          {t("editor.backToDashboard")}
         </Link>
       </div>
     );
@@ -108,7 +110,7 @@ function EditorPage() {
           params={{ cvId: cv.id }}
           className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 transition-all duration-200 shadow-sm hover:shadow-md"
         >
-          Full Preview & Export
+          {t("editor.fullPreview")}
         </Link>
       </div>
       <div
