@@ -38,7 +38,7 @@ export function CreateCvDialog({ open, onConfirm, onCancel }: CreateCvDialogProp
       ref={dialogRef}
       onClose={onCancel}
       aria-labelledby={titleId}
-      className="rounded-2xl border-none bg-white p-6 shadow-2xl backdrop:bg-black/40 backdrop:backdrop-blur-sm max-w-md w-full"
+      className="m-auto rounded-2xl border-none bg-white p-6 shadow-2xl backdrop:bg-black/40 backdrop:backdrop-blur-sm max-w-md w-full"
     >
       <h2 id={titleId} className="text-lg font-semibold text-slate-900">{t("dialogs.createTitle")}</h2>
       <form onSubmit={handleSubmit} className="mt-4 space-y-5">
