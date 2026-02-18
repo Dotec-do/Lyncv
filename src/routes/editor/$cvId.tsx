@@ -34,7 +34,9 @@ function EditorPage() {
       if (!containerRef.current) return;
       const containerWidth = containerRef.current.clientWidth - 32;
       const a4Width = 794;
-      setScale(Math.min(containerWidth / a4Width, 1));
+      const fitScale = containerWidth / a4Width;
+      // On small screens, use a readable minimum and allow horizontal scroll
+      setScale(Math.min(Math.max(fitScale, 0.6), 1));
     }
     computeScale();
     let timerId: ReturnType<typeof setTimeout>;
@@ -103,7 +105,7 @@ function EditorPage() {
   );
 
   const previewPanel = (
-    <div ref={containerRef} className="p-4">
+    <div ref={containerRef} className="p-4 overflow-x-auto">
       <div className="flex justify-end mb-3 print:hidden">
         <Link
           to="/preview/$cvId"
