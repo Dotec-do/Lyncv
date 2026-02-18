@@ -12,6 +12,8 @@ export const en = {
     noCvsDesc: "Get started by creating your first CV",
     createFirst: "Create your first CV",
     updated: "Updated {{date}}",
+    untitledCv: "Untitled CV",
+    copySuffix: "(copy)",
   },
   editor: {
     notFound: "CV not found",

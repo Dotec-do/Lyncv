@@ -28,17 +28,22 @@ function EditorPage() {
   cvRef.current = cv;
   const [scale, setScale] = useState(0.5);
 
-  // Scale preview to fit container (debounced)
+  // Scale preview to fit container
+  const computeScale = useCallback(() => {
+    if (!containerRef.current) return;
+    const containerWidth = containerRef.current.clientWidth - 32;
+    const a4Width = 794;
+    const fitScale = containerWidth / a4Width;
+    setScale(Math.min(Math.max(fitScale, 0.6), 1));
+  }, []);
+
+  // Recompute on mount and when cv loads (containerRef becomes available)
   useEffect(() => {
-    function computeScale() {
-      if (!containerRef.current) return;
-      const containerWidth = containerRef.current.clientWidth - 32;
-      const a4Width = 794;
-      const fitScale = containerWidth / a4Width;
-      // On small screens, use a readable minimum and allow horizontal scroll
-      setScale(Math.min(Math.max(fitScale, 0.6), 1));
-    }
     computeScale();
+  }, [computeScale, cv?.id]);
+
+  // Recompute on window resize (debounced)
+  useEffect(() => {
     let timerId: ReturnType<typeof setTimeout>;
     function handleResize() {
       clearTimeout(timerId);
@@ -49,7 +54,7 @@ function EditorPage() {
       window.removeEventListener("resize", handleResize);
       clearTimeout(timerId);
     };
-  }, []);
+  }, [computeScale]);
 
   // Stable callback: uses ref to avoid re-renders from cv dependency
   const updateField = useCallback(
@@ -116,7 +121,7 @@ function EditorPage() {
         </Link>
       </div>
       <div
-        style={{ transform: `scale(${scale})`, transformOrigin: "top left", height: `${297 * scale * 3.78}px` }}
+        style={{ transform: `scale(${scale})`, transformOrigin: "top left" }}
       >
         <CvDocument ref={previewRef} data={cv} />
       </div>

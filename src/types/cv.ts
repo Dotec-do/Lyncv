@@ -50,10 +50,12 @@ export interface LanguageItem {
   proficiency: LanguageProficiency;
 }
 
+import type { TemplateId } from "./template";
+
 export interface CvData {
   id: string;
   name: string;
-  templateId: string;
+  templateId: TemplateId;
   createdAt: string;
   updatedAt: string;
   personalInfo: PersonalInfo;

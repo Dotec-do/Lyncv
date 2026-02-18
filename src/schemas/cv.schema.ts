@@ -51,8 +51,8 @@ export const languageItemSchema = z.object({
 
 export const cvDataSchema = z.object({
   id: z.string(),
-  name: z.string().min(1),
-  templateId: z.string(),
+  name: z.string(),
+  templateId: z.enum(["classic", "modern"]),
   createdAt: z.string(),
   updatedAt: z.string(),
   personalInfo: personalInfoSchema,

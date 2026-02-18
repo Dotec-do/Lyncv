@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useDialog } from "../../hooks/use-dialog";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { TEMPLATE_LIST } from "../../lib/constants";
+import { TEMPLATE_IDS } from "../../lib/constants";
 import type { TemplateId } from "../../types/template";
 
 interface CreateCvDialogProps {
@@ -53,19 +53,20 @@ export function CreateCvDialog({ open, onConfirm, onCancel }: CreateCvDialogProp
         <div className="space-y-2">
           <span className="text-sm font-medium text-slate-700">{t("fields.template")}</span>
           <div className="grid grid-cols-2 gap-3">
-            {TEMPLATE_LIST.map((tpl) => (
+            {TEMPLATE_IDS.map((id) => (
               <button
-                key={tpl.id}
+                key={id}
                 type="button"
-                onClick={() => setTemplateId(tpl.id)}
+                aria-pressed={templateId === id}
+                onClick={() => setTemplateId(id)}
                 className={`rounded-xl border-2 p-4 text-left transition-all duration-200 ${
-                  templateId === tpl.id
+                  templateId === id
                     ? "border-emerald-500 bg-emerald-50 shadow-sm"
                     : "border-slate-200 hover:border-slate-300 hover:shadow-sm"
                 }`}
               >
-                <div className="text-sm font-medium text-slate-800">{t(`templates.${tpl.id}`)}</div>
-                <div className="mt-1 text-xs text-slate-500">{t(`templates.${tpl.id}Desc`)}</div>
+                <div className="text-sm font-medium text-slate-800">{t(`templates.${id}`)}</div>
+                <div className="mt-1 text-xs text-slate-500">{t(`templates.${id}Desc`)}</div>
               </button>
             ))}
           </div>

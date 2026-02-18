@@ -14,7 +14,7 @@ function PreviewPage() {
   const { cvId } = Route.useParams();
   const { cv } = useCv(cvId);
   const printRef = useRef<HTMLDivElement>(null);
-  const handlePrint = usePrintCv(printRef);
+  const handlePrint = usePrintCv(printRef, cv?.name);
   const { t } = useTranslation();
 
   if (!cv) {

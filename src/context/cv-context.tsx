@@ -1,4 +1,5 @@
-import { createContext, useContext, useReducer, useEffect, useRef, type ReactNode } from "react";
+import { createContext, useContext, useReducer, useEffect, useRef, useCallback, type ReactNode } from "react";
+import i18next from "i18next";
 import type { CvData } from "../types/cv";
 import { loadCvList, saveCvList } from "../services/storage.service";
 import { nowISO } from "../lib/date";
@@ -36,7 +37,7 @@ function cvReducer(state: CvState, action: CvAction): CvState {
       const copy: CvData = {
         ...original,
         id: newId,
-        name: `${original.name} (copy)`,
+        name: `${original.name} ${i18next.t("dashboard.copySuffix")}`,
         createdAt: now,
         updatedAt: now,
       };
@@ -56,11 +57,15 @@ const CvContext = createContext<CvContextValue | null>(null);
 
 export function CvProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(cvReducer, { cvList: [] });
+  const listRef = useRef(state.cvList);
+  listRef.current = state.cvList;
   const initialized = useRef(false);
 
   // Load from localStorage on mount
   useEffect(() => {
-    dispatch({ type: "SET_LIST", payload: loadCvList() });
+    const loaded = loadCvList();
+    dispatch({ type: "SET_LIST", payload: loaded });
+    listRef.current = loaded;
     initialized.current = true;
   }, []);
 
@@ -70,6 +75,16 @@ export function CvProvider({ children }: { children: ReactNode }) {
     const timeout = setTimeout(() => saveCvList(state.cvList), 500);
     return () => clearTimeout(timeout);
   }, [state.cvList]);
+
+  // Flush pending changes on tab close
+  const flushSave = useCallback(() => {
+    if (initialized.current) saveCvList(listRef.current);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", flushSave);
+    return () => window.removeEventListener("beforeunload", flushSave);
+  }, [flushSave]);
 
   return (
     <CvContext.Provider value={{ cvList: state.cvList, dispatch }}>

@@ -34,7 +34,7 @@ export function ArrayField<T extends { id: string }>({ items, onAdd, onRemove, r
         </div>
       ))}
       <Button variant="ghost" size="sm" onClick={onAdd} className="w-full border border-dashed border-slate-300 hover:border-emerald-400 hover:text-emerald-600">
-        + {addLabel}
+        + {addLabel ?? t("actions.create")}
       </Button>
     </div>
   );

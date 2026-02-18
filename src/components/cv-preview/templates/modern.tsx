@@ -32,11 +32,11 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 p-6 space-y-5">
+      <div className="flex-1 p-6 space-y-5">
         <SummaryBlock content={data.summary} />
         <ExperienceList items={data.experience} />
         <EducationList items={data.education} />
-      </main>
+      </div>
     </div>
   );
 }

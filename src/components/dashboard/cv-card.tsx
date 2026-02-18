@@ -12,8 +12,8 @@ interface CvCardProps {
 }
 
 export function CvCard({ cv, onDelete, onDuplicate }: CvCardProps) {
-  const { t } = useTranslation();
-  const updatedDate = new Date(cv.updatedAt).toLocaleDateString();
+  const { t, i18n } = useTranslation();
+  const updatedDate = new Date(cv.updatedAt).toLocaleDateString(i18n.language);
 
   return (
     <Card className="flex flex-col gap-3">
